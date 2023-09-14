@@ -1,0 +1,13 @@
+Desenvolva o código de um programa que seja capaz de calcular as componentes f-conexas de um grafo direcionado.
+
+- Entrada: grafo direcionado; Saída: componentes f-conexas.
+- A entrada pode ser feita da forma que o/a aluno/a achar mais conveniente. Uma sugestão é usar um arquivo texto no qual cada linha possui duas colunas: a primeira referente a um vértice de saída e a segunda referente a um vértice de entrada. Por exemplo, para o grafo que está no slide 12 da aula02.pdf (que está no portal didático) o conteúdo do arquivo texto de entrada ficaria assim:
+A    C
+B    A
+C    B
+C    D
+D    B
+- O programa pode ser desenvolvido em qualquer linguagem. Para uma prototipagem mais rápida, recomendo Python (mesmo para quem não tem experiência, vale a pena enfrentar a curva de aprendizado). Para um domínio maior das estruturas de dados, recomendo C (é uma linguagem excelente para a tarefa, mas pode tomar mais tempo do desenvolvimento).
+- Para construir a estrutura de dados (E APENAS PARA ISSO), é permitido usar alguma biblioteca de manipulação de grafos. Duas que eu conheço e sei que são fáceis, são networkx e igraph. Acredito que as duas já estão instaladas nos laboratórios, ao menos para Python. Se for o caso de instalar em outra linguagem (ou mesmo em notebooks próprios), eu posso tentar auxiliar. No caso do uso das bibliotecas, recomendo dar uma olhada nos tutoriais e demos das bibliotecas. Tem muita coisa na internet, inclusive nos seus próprios sites (https://networkx.org/ e https://igraph.org/).
+- O envio das atividades deve ser feito aqui mesmo no Portal Didático. Devem ser enviados: o código, os arquivos de entrada e uma mini documentação, apenas com instruções para execução, a entrada que você usou e a saída esperada da execução.
+- A pontuação da atividade será feita naquele esquema não obrigatório que eu expliquei na primeira aula (aula00.pdf).
