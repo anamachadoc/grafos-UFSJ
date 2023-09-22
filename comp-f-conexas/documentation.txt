@@ -1,0 +1,26 @@
+Aluna: Ana Cláudia Machado
+    Entrada:
+        A entrada é um arquivo .txt, intitulado "graph", contendo as arestas direcionadas. Utiliza-se a biblioteca networkx para
+        fazer a leitura desse arquivo e, após isso, utiliza-se listas para armazenar e trabalhar com os vértices 
+        e arestas.
+    Plotagem do grafo:
+        A biblioteca citada também é utilizada na plotagem do grafo, de modo a facilitar a visualização das 
+        componentes f-conexas existentes.
+    Funcionamento do algoritmo:
+        A princípio, têm-se as listas para os fechos transitivos direto ("r_plus") e inverso ("r_minus), os quais iniciam 
+        contendo apenas o vértice v em relação ao qual os fechos serão definidos. Para definir os fechos, utiliza-se dois for:
+         o externo roda para todos os vértices no fecho e o interno, para todos os vértices no grafo, de modo que:
+            - para cada vértice no fecho, procura-se todos os vértices que ele atinge, no caso do fecho transitivo direito,
+            e todos os vértices que o atingem, no caso do fecho transitivo inverso;
+            - esses vértices são adicionados ao fecho transitivo, de modo que o for externo rodará para eles também
+        Assim, define-se os fechos transitivos direto e inverso de v. Em seguida, verifica-se quais dos vértices do grafo
+        estão tanto em r_plus quanto em r_minus, pois a intersecção desses dois conjuntos de vértices é uma componentes
+        fortemente conexa do grafo. A partir daí, retira-se os vertíces da componente f-conexa do grafo G e repete-se
+        o processo até que G não tenha mais nenhum vértice.
+        Para armazenar as componentes f-conexas é utilizada uma lista de listas ("result"), a qual é atualizada toda vez
+        que uma componente f-conexas é descoberta.
+    Saída:
+        A saída possui duas formas: no terminal e em um arquivo .txt intitulado "comp-f-conexas". Dessa forma, é 
+        possível vizualizar o resultado da forma que mais agrada ao usuário. Em ambas as saídas, também é mostrado
+        o número de componentes f-conexas.
+    
