@@ -41,5 +41,19 @@ for vertice in vert: # encontrando o ultimo vertice do grafo
             cont = cont + 1
     if cont == len(edges):
         fila.append(vertice)
+        vertices[vertice-1]["LST"] = vertices[vertice-1]["EST"]
+
+for vertice in fila:
+    for i in range(len(edges)):
+        if (edges[i][1] == vertice): # quem alcanca ele
+            antecessor = edges[i][0]
+            weightEdges = (nx.get_edge_attributes (G, "weight")[edges[i]])
+            newLST = vertices[vertice-1]["LST"] - weightEdges
+            if (vertices[antecessor-1]["LST"] > newLST):
+                vertices[antecessor-1]["LST"] = newLST
+            if antecessor not in fila:
+                fila.append(antecessor)
+for vertice in vertices:
+    print (vertice)
      
         
