@@ -1,0 +1,4 @@
+3 componente(s) f-conexa(s):
+[ 'E' 'F' ]
+[ 'A' 'D' 'B' 'C' ]
+[ 'I' 'G' 'H' 'J' 'K' ]

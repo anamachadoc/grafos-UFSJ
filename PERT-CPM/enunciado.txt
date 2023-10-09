@@ -1,0 +1,29 @@
+Desenvolva o código de um programa que seja capaz de calcular: tempos mais cedo, tempos mais tarde e caminho crítico de um 
+conjunto de atividades modelado como um grafo PERT.
+- Entrada: grafo direcionado com pesos das atividades; Saída: tempos mais cedo, tempos mais tarde e caminho crítico.
+- A entrada pode ser feita da forma que o/a aluno/a achar mais conveniente. Uma sugestão é usar um arquivo texto no qual 
+cada linha possui três colunas: a primeira referente a um vértice que representa um evento que marca o início de uma atividade, 
+segunda referente a um vértice que representa um evento que marca o fim da atividade e a terceira referente à duração da atividade. 
+Por exemplo, para o grafo que está no slide 14 da aula04.pdf (que está no portal didático) o conteúdo do arquivo texto de entrada 
+ficaria assim (para permitir o desenvolvimento do código, eu coloquei índices nos vértices, já que na figura do slide 14 os vértices
+estão sem nome):
+1    2    7
+1    3    5
+2    4   9
+3    5   6
+4    5   0
+4    6    11
+5    7    4
+6    8    3
+7    8    8
+8    9    6
+8    10   4
+10   9    0
+9    11    7
+
+Como é possível perceber, cada linha representa uma atividade, modelada como aresta.
+
+- O programa pode ser desenvolvido em qualquer linguagem. Para uma prototipagem mais rápida, recomendo Python (mesmo para quem não tem experiência, vale a pena enfrentar a curva de aprendizado). Para um domínio maior das estruturas de dados, recomendo C (é uma linguagem excelente para a tarefa, mas pode tomar mais tempo do desenvolvimento).
+- Para construir a estrutura de dados (E APENAS PARA ISSO), é permitido usar alguma biblioteca de manipulação de grafos. Duas que eu conheço e sei que são fáceis, são networkx e igraph. Acredito que as duas já estão instaladas nos laboratórios, ao menos para Python. Se for o caso de instalar em outra linguagem (ou mesmo em notebooks próprios), eu posso tentar auxiliar. No caso do uso das bibliotecas, recomendo dar uma olhada nos tutoriais e demos das bibliotecas. Tem muita coisa na internet, inclusive nos seus próprios sites (https://networkx.org/ e https://igraph.org/).
+- O envio das atividades deve ser feito aqui mesmo no Portal Didático. Devem ser enviados: o código, os arquivos de entrada e uma mini documentação, apenas com instruções para execução, a entrada que você usou e a saída esperada da execução.
+- A pontuação da atividade será feita naquele esquema não obrigatório que eu expliquei na primeira aula (aula00.pdf).
