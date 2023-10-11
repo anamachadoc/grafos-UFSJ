@@ -33,6 +33,7 @@ for vertice in vert:
             newEST = vertices[edges[i][0]-1].get("EST") + weightEdges[i]
             if (newEST > vertices[vertice-1].get("EST")):
                 vertices[vertice-1]["EST"] = newEST
+                
 fila =  []     
 for vertice in vert: # encontrando o ultimo vertice do grafo
     cont = 0
@@ -53,7 +54,17 @@ for vertice in fila:
                 vertices[antecessor-1]["LST"] = newLST
             if antecessor not in fila:
                 fila.append(antecessor)
+                
 for vertice in vertices:
     print (vertice)
+
+crit = []
+for edge in edges:
+    begin = edge[0]
+    end = edge[1]
+    if (vertices[begin-1]["LST"] - vertices[end-1]["EST"] == 0):
+        crit.append (edge)
+
+print ("\nFaz parte do caminho critico as arestas:{}", .format(crit));
      
         
