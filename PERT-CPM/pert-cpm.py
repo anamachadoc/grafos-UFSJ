@@ -1,59 +1,51 @@
 import networkx as nx
-import matplotlib.pyplot as plt
-import random as rd
-import numpy as np
 
 # reading an directed graph
 G = nx.read_weighted_edgelist("graph.txt", nodetype = int, create_using=nx.DiGraph())
 vert = list(G.nodes)
 edges = list(G.edges)
-vertices = []
-# Earliest Start Time (EST) and Latest Start Time (LST)
-for vertice in vert:
-    vertices.append ({"vertice": vertice, "EST": 0, "LST": 1000})
 weightEdges = []
 for edge in edges:
     weightEdges.append((nx.get_edge_attributes (G, "weight")[edge]))
-
-'''
-plotting the input graph
-nx.draw_spectral(
-    G, 
-    with_labels = True,
-    node_size = 300,
-    node_color = 'pink',
-    )
-plt.show()
-
-'''
+    
+# dictionary with vertice, Earliest Start Time (EST) and Latest Start Time (LST)
+vertices = []
+for vertice in vert:
+    vertices.append ({"vertice": vertice, "EST": 0.0, "LST": 1000.0})
 
 for vertice in vert:
     for i in range(len(edges)): 
-        if (edges[i][1] == vertice): # vertice eh alcancado por outro
+        if (edges[i][1] == vertice): # vertice is edge ending
             newEST = vertices[edges[i][0]-1].get("EST") + weightEdges[i]
             if (newEST > vertices[vertice-1].get("EST")):
                 vertices[vertice-1]["EST"] = newEST
-fila =  []     
-for vertice in vert: # encontrando o ultimo vertice do grafo
-    cont = 0
-    for i in range(len(edges)): 
-        if vertice != edges[i][0]:
-            cont = cont + 1
-    if cont == len(edges):
-        fila.append(vertice)
-        vertices[vertice-1]["LST"] = vertices[vertice-1]["EST"]
 
-for vertice in fila:
+# priority queue to find LST's vertices
+queue =  []     
+vertices[len(vertices)-1]["LST"] = vertices[len(vertices)-1]["EST"]
+queue.append(vertices[len(vertices)-1]['vertice']) # the last vertice of the graph is the first in queue
+        
+for vertice in queue:
     for i in range(len(edges)):
-        if (edges[i][1] == vertice): # quem alcanca ele
+        if (edges[i][1] == vertice): # vertice is edge ending
             antecessor = edges[i][0]
-            weightEdges = (nx.get_edge_attributes (G, "weight")[edges[i]])
-            newLST = vertices[vertice-1]["LST"] - weightEdges
+            newLST = vertices[vertice-1]["LST"] - weightEdges[i]
             if (vertices[antecessor-1]["LST"] > newLST):
                 vertices[antecessor-1]["LST"] = newLST
-            if antecessor not in fila:
-                fila.append(antecessor)
+            if antecessor not in queue:
+                queue.append(antecessor)
+    
+# define critical path
+criticalPath = []
+for i in range(len(edges)):
+    begin = edges[i][0]
+    end = edges[i][1]
+    if (vertices[end-1]["LST"] - vertices[begin-1]["EST"] - weightEdges[i] == 0):
+        criticalPath.append (edges[i])
+
+# output
 for vertice in vertices:
     print (vertice)
+print (f"\nFaz parte do caminho critico as arestas:{criticalPath}" )
      
         
