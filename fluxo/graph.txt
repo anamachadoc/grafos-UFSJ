@@ -4,4 +4,4 @@ A B 60
 C B 70
 C D 60
 B T 30
-D T 50
+D T 30
