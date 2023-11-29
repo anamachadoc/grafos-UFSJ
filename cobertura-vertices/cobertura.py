@@ -1,34 +1,47 @@
-import funcoes as f
 import networkx as nx
-import re
+import funcoesAuxiliares as f
+import matplotlib.pyplot as plt
 
-G = nx.DiGraph()
+G = f.lendoEntrada()
+grafoResposta = G.copy()
 
-# lendo o arquivo de entrada e construindo o grafo
-graph = open('sjdr.gml')
-line = graph.readlines()
-for i in range(len(line)):
-    if ('node' in line[i]): # lendo vertice
-        ID = line[i+1].split() # ID
-        nodeID = int(ID[1])
-        labelNode = line[i+2].split() # label
-        label = re.sub('"', '', labelNode[1])
-        G.add_node(nodeID, label = label)
-    elif ('edge' in line[i]): # lendo aresta
-        sourceEdge = line[i+1].split()
-        source = int(sourceEdge[1])
-        targetEdge = line[i+2].split()
-        target = int(targetEdge[1])
-        nameStreet = re.sub('"', '', line[i+3])
-        nameStreet = nameStreet[8:]
-        G.add_edge(source, target, name = nameStreet)
+# definindo o layout para as plotagens
+pos = nx.kamada_kawai_layout(G)
+# plotando grafo de entrada
+nx.draw(
+        G,
+        pos =  pos,
+        with_labels = True,
+        font_size = 5,
+        node_size = 60,
+        node_color = '#8EE5EE',    
+        )
+plt.savefig("entrada.jpg")
 
-A = {
-    'vertice': [],
-    'numAdjacentes': []
-}
+verticesCamera = [] 
+naoMonitoradas = list(G.edges())
+ruasMonitoradas = {}  
+    
+while (naoMonitoradas != []):
+    conjuntoVertices = f.ordenarVertices(G)
+    vertice = conjuntoVertices.pop(0) 
+    posCamera = vertice[1] # vertice que deve conter uma camera
+    verticesCamera.append(posCamera)
+    f.monitorarRuas (G, posCamera, ruasMonitoradas, naoMonitoradas)
+    G.remove_node(posCamera)
+f.verificarCamerasInuteis(grafoResposta, verticesCamera, ruasMonitoradas)
+color = f.criandoGrafoSaida(grafoResposta, verticesCamera)
+f.criandoSaida(grafoResposta, verticesCamera, ruasMonitoradas) 
 
-for node in G.nodes():
-    A['vertice'].append(node)
-    A['numAdjacentes'].append(G.out_degree(node))
-
+pos = nx.kamada_kawai_layout(grafoResposta)
+# plotando o grafo de saida
+nx.draw(
+        grafoResposta,
+        pos =  pos,
+        with_labels = True,
+        font_size = 5,
+        node_size = 60,
+        node_color = color,    
+        )
+plt.savefig("resultado.png")
+    
